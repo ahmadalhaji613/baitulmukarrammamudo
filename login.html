@@ -1,0 +1,42 @@
+<marquee behavior="scroll" direction="left" style="background: #007b5e; color: white; padding: 10px; font-weight: bold;">
+  Barka da zuwa Baitul Mukarram - Allah ya ba da sa'a!
+</marquee>
+<h1 class="animated-heading">As musch as you do you get what you want</h1>
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Baitul Mukarram</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Shiga Tsarin Makaranta</h2>
+    <form onsubmit="return validateLogin()">
+      <label for="id">ID Number:</label><br>
+      <input type="text" id="id" name="id" required><br><br>
+
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password" required><br><br>
+
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+  <script>
+    function validateLogin() {
+      var id = document.getElementById('id').value;
+      var password = document.getElementById('password').value;
+
+      // Idan ID da password sun dace, a tura zuwa dashboard
+      if (id === 'BMM2025-001' && password === '1234') {
+        window.location.href = 'dashboard.html';
+        return false;
+      } else {
+        alert('Incorrect.');
+        return false;
+      }
+    }
+  </script>
+</body>
+</html>

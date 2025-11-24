@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ha">
+<head>
+  <meta charset="UTF-8">
+  <title>School History - Baitul Mukarram</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Small styles for the language toggle and animations.
+       These are minimal and won't override your style.css specifics.
+       If you want them moved into style.css, tell me and I'll extract them. */
+    .lang-toggle-bar {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+    }
+
+    .lang-toggle-btn {
+      background: #ffffff;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform .18s ease, background .18s ease;
+      user-select: none;
+      font-weight: 700;
+    }
+
+    .lang-toggle-btn:active { transform: scale(.96); }
+
+    .lang-indicator {
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    /* Animation for content change */
+    .fade-slide {
+      animation: fadeSlide .45s ease;
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(8px); }
+      60% { opacity: 0.6; transform: translateY(-4px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Ensure the top fixed toggle doesn't overlap content on small screens */
+    @media (max-width: 600px) {
+      .lang-toggle-bar { left: 8px; top: 8px; }
+      .lang-toggle-btn { padding: 5px 8px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Language toggle (saman gaba daya) -->
+  <div class="lang-toggle-bar" aria-hidden="false">
+    <div class="lang-indicator" id="lang-indicator">HA</div>
+    <button id="lang-toggle" class="lang-toggle-btn" aria-label="Change language">HA</button>
+  </div>
+
+  <div class="sidebar">
+    <h2 id="brand">Baitul Mukarram</h2>
+    <a href="dashboard.html" id="link-dashboard">Dashboard</a>
+    <a href="profile.html" id="link-profile">Profile</a>
+    <a href="pay.html" id="link-pay">Pay Semester</a>
+    <a href="idcard.html" id="link-idcard">ID Card</a>
+    <a href="school-history.html" id="link-history">School History</a>
+    <a href="logout.html" id="link-logout">Logout</a>
+  </div>
+
+  <div class="main-content" id="main-content">
+    <h1 id="title">Tarihin Makarantar Baitul Mukarram</h1>
+    <p id="intro">Tarihin yadda Allah ya Raini wannan makarantar tun kafin ta kafu da kafanta.</p>
+
+    <h2 id="progress">Manyan Ci gaba:</h2>
+    <ul id="milestones">
+      <li id="m1">2016 - Yadda aka samu Filin Makarantar</li>
+      <li id="m2">2018 - Abubuwan da makarantar ta fara dasu</li>
+      <li id="m3">2020 - kalubalen da makarantar ta fuskanta</li>
+      <li id="m4">2023 - Tarihin yadda Makarantar ta canja tsarinta kuma tayi karfi sosai</li>
+    </ul>
+
+    <h2 id="photos-heading">Hotuna:</h2>
+
+    <img src="image/1.jpg" alt="Ginin farko" id="img1" style="width:100%; max-width:600px; margin-bottom:10px;">
+    <h4 id="cap1">
+Allahu Akbar,
+makarantar ta samu asalin ci gabanta daga wani abu da ya tada hankalin malamai da daliban makarantar kamar yadda zakuga ga wasu malamai daga cikin malaman makarantar cike da damuwa sunzo suna kalon ikon allah, babu wani kudi da makarantar take ajiyewa domin fuskatar barazanar da zai iya tunkaranta nan gaba. Wannan yasa kowa yake kallon kamar ta gujewa duk wata barazana, sai dai Allah yakan Jarabci Bawa domin ya nuna masa wani abun da bai daukeshi hatsari a rayuwarsa ba daga qarshe sai ya gyara masa tunaninsa da ita.
+    </h4>
+
+    <img src="image/2.jpg" alt="Ajin farko" id="img2" style="width:100%; max-width:600px;">
+    <h4 id="cap2">
+Ko me zai faru dai gashinan an rusa makarantar kuma malaman sune leburorinta kamar yadda zaku ga daya daga cikin malaman ya zage yana aiki. Sai dai kash duk da zulumin da malaman ke ciki na gininsu ya rushe an qara samun wani tashin hankali lokacin maida sabon ginin. Lokacin da aka bada filin mai filin ya zana iya inda za ayi makarantar ya bar sauran a kanshi to lokacin da ya bada filin akwai wata bishiya a setin ginin to sai yace a dauki harsashin ginin daga bayan bishiyan...
+    </h4>
+
+    <img src="image/3.jpg" alt="Ajin farko" id="img3" style="width:100%; max-width:600px;">
+    <h4 id="cap3">
+An dai ci gaba da tonon harsashin ginin kamar yadda ya bayyana a wannan hoton; duk wannan ya faru ne a ranar da aka rushe ginin, sannan wannan aikin bai sa an bada hutu a dalibai ba; haka aka ci gaba da karantarwa a daya gefen.
+    </h4>
+
+    <img src="image/4.jpg" alt="Ajin farko" id="img4" style="width:100%; max-width:600px;">
+    <h4 id="cap4">
+Abu dai ya fara Tafiya Sai Godiya — gashi waje ya fara haskawa da sabon gini da aka fara; zukatan malamai ya fara samun nutsuwa duk da rashin kudin da makarantar take dashi amma akwai kyakkyawan manufa akan ci gaba. Anyi kos biyar har da harsashin ginin a rana ta farko...
+    </h4>
+
+    <img src="image/5.jpg" alt="Ajin farko" id="img5" style="width:100%; max-width:600px;">
+    <h4 id="cap5">
+Alhamdu lillahi — Gini dai ya fara kamo tsawon Mutum a rana ta biyu, wannan da kuke gani Malamine ya dauki buta za ayi sallan Azahar kafin a ci gaba...
+    </h4>
+
+    <img src="image/6.jpg" alt="Ajin farko" id="img6" style="width:100%; max-width:600px;">
+    <h4 id="cap6">
+To fa!!! Gini yakai linter amma babu kudin sayen rodi amma akwai zuciya mai niyya; wannan yasa aka dauki wani adadin watanni ana harhada kudin da za a sayi rodin...
+    </h4>
+
+    <img src="image/7.jpg" alt="Ajin farko" id="img7" style="width:100%; max-width:600px;">
+    <h4 id="cap7">To fa!!!</h4>
+  </div>
+
+  <script>
+    // Languages cycle: ha -> ar -> en -> ha ...
+    (function() {
+      const LANGS = ['ha', 'ar', 'en'];
+      let currentIndex = 0; // default Hausa
+
+      // Translations object. Keys correspond to element IDs.
+      const translations = {
+        'ha': {
+          // Sidebar / links (we keep link hrefs unchanged)
+          'brand': 'Baitul Mukarram',
+          'link-dashboard': 'Dashboard',
+          'link-profile': 'Profile',
+          'link-pay': 'Pay Semester',
+          'link-idcard': 'ID Card',
+          'link-history': 'School History',
+          'link-logout': 'Logout',
+
+          // Main content
+          'title': 'Tarihin Makarantar Baitul Mukarram',
+          'intro': 'Tarihin yadda Allah ya Raini wannan makarantar tun kafin ta kafu da kafanta.',
+          'progress': 'Manyan Ci gaba:',
+          'm1': '2016 - Yadda aka samu Filin Makarantar',
+          'm2': '2018 - Abubuwan da makarantar ta fara dasu',
+          'm3': '2020 - kalubalen da makarantar ta fuskanta',
+          'm4': '2023 - Tarihin yadda Makarantar ta canja tsarinta kuma tayi karfi sosai',
+          'photos-heading': 'Hotuna:',
+
+          'img1': 'Ginin farko',
+          'cap1': `Allahu Akbar,
+makarantar ta samu asalin ci gabanta daga wani abu da ya tada hankalin malamai da daliban makarantar kamar yadda zakuga ga wasu malamai daga cikin malaman makarantar cike da damuwa sunzo suna kalon ikon Allah, babu wani kudi da makarantar take ajiyewa domin fuskatar barazanar da zai iya tunkaranta nan gaba. Wannan yasa kowa yake kallon kamar ta gujewa duk wata barazana, sai dai Allah yakan Jarabci Bawa domin ya nuna masa wani abun da bai daukeshi hatsari a rayuwarsa ba daga qarshe sai ya gyara masa tunaninsa da ita.`,
+
+          'img2': 'Ajin farko',
+          'cap2': `Ko me zai faru dai gashinan an rusa makarantar kuma malaman sune leburorinta kamar yadda zaku ga daya daga cikin malaman ya zage yana aiki. Sai dai kash duk da zulumin da malaman ke ciki na gininsu ya rushe an qara samun wani tashin hankali lokacin maida sabon ginin...`,
+
+          'img3': 'Ajin farko',
+          'cap3': `An dai ci gaba da tonon harsashin ginin kamar yadda ya bayyana a wannan hoton; duk wannan ya faru ne a ranar da aka rushe ginin, sannan wannan aikin bai sa an bada hutu a dalibai ba; haka aka ci gaba da karantarwa a daya gefen.`,
+
+          'img4': 'Ajin farko',
+          'cap4': `Abu dai ya fara Tafiya Sai Godiya — gashi waje ya fara haskawa da sabon gini da aka fara; zukatan malamai ya fara samun nutsuwa duk da rashin kudin da makarantar take dashi amma akwai kyakkyawan manufa akan ci gaba.`,
+
+          'img5': 'Ajin farko',
+          'cap5': `Alhamdu lillahi — Gini dai ya fara kamo tsawon Mutum a rana ta biyu, wannan da kuke gani Malamine ya dauki buta za ayi sallan Azahar kafin a ci gaba.`,
+
+          'img6': 'Ajin farko',
+          'cap6': `To fa!!! Gini yakai linter amma babu kudin sayen rodi amma akwai zuciya mai niyya; wannan yasa aka dauki wani adadin watanni ana harhada kudin da za a sayi rodin...`,
+
+          'img7': 'Ajin farko',
+          'cap7': 'To fa!!!'
+        },
+
+        'ar': {
+          // Arabic translations (in Arabic script). Shortened/smoothed for readability.
+          'brand': 'بيت المركم',
+          'link-dashboard': 'لوحة التحكم',
+          'link-profile': 'الملف الشخصي',
+          'link-pay': 'دفع الرسوم',
+          'link-idcard': 'بطاقة الهوية',
+          'link-history': 'تاريخ المدرسة',
+          'link-logout': 'تسجيل الخروج',
+
+          'title': 'تاريخ مدرسة بيت المكرّم',
+          'intro': 'قصة كيف رعاها الله قبل أن تتأسس وتثبت أقدامها.',
+          'progress': 'أهم الإنجازات:',
+          'm1': '2016 - كيفية الحصول على أرض المدرسة',
+          'm2': '2018 - الأشياء التي بدأت بها المدرسة',
+          'm3': '2020 - التحديات التي واجهتها المدرسة',
+          'm4': '2023 - قصة كيف تطورت المدرسة وتقوت',
+
+          'photos-heading': 'صور:',
+
+          'img1': 'المبنى الأول',
+          'cap1': `الله أكبر،
+حصلت المدرسة على بدايات نموها من حادثة أثارت قلق المعلمين والطلاب. جاء بعض المعلمين بقلوبهم مثقلة ليروا قدرة الله؛ لم يكن لدى المدرسة أموال محفوظة لمواجهة المخاطر المستقبلية. ظنّ الكثيرون أن المدرسة نجت من تهديد، لكن الله يختبر عبده ليكشف له أموراً لم يكن يعتبرها خطراً ثم يغيّر فكره.`,
+
+          'img2': 'الفصل الأول',
+          'cap2': `ماذا حدث حين انهار المبنى؟ انهمك المعلمون في العمل رغم الصعوبات. عندما أُعطيَت الأرض لتشييد المدرسة، كانت هناك شجرة في موقع البناء، فطلب صاحب الأرض أخذ أساس البناء من خلف الشجرة...`,
+
+          'img3': 'الفصل الأول',
+          'cap3': `استمرّ استخراج أساسات البناء كما تظهر هذه الصورة؛ كلّ ذلك حدث يوم انهيار المبنى، ولم يُعطَ الطلاب عطلة، بل واصلوا الدوام في جهةٍ أخرى.`,
+
+          'img4': 'الفصل الأول',
+          'cap4': `بدأت الأمور تتحسّن والحمد لله؛ أشرقت مكان الأعمال بالمبنى الجديد فطمأن قلوب المعلمين رغم قلة المال، وكان الهدف واضحاً وهو البناء والاستمرار.`,
+
+          'img5': 'الفصل الأول',
+          'cap5': `الحمد لله — بدأ البناء يأخذ شكلاً واضحاً في اليوم الثاني؛ بعض المعلمين أخذوا استراحة لأداء صلاة الظهر قبل متابعة العمل.`,
+
+          'img6': 'الفصل الأول',
+          'cap6': `وصل البناء إلى مستوى العوارض (lintel) رغم عدم كفاية المال لشراء الحديد (rod)، لكن الإصرار كان موجوداً، فجمعت المدرسة مبالغ على مدار شهور لشراء الحديد.`,
+
+          'img7': 'الفصل الأول',
+          'cap7': 'ثمّ ما بعدها!!!'
+        },
+
+        'en': {
+          // English translations
+          'brand': 'Baitul Mukarram',
+          'link-dashboard': 'Dashboard',
+          'link-profile': 'Profile',
+          'link-pay': 'Pay Semester',
+          'link-idcard': 'ID Card',
+          'link-history': 'School History',
+          'link-logout': 'Logout',
+
+          'title': 'History of Baitul Mukarram School',
+          'intro': 'The story of how God blessed and guided this school even before it was formally established.',
+          'progress': 'Major Milestones:',
+          'm1': '2016 - How the school land was acquired',
+          'm2': '2018 - The facilities the school started with',
+          'm3': '2020 - Challenges the school faced',
+          'm4': '2023 - How the school changed its structure and became stronger',
+
+          'photos-heading': 'Photos:',
+
+          'img1': 'The first building',
+          'cap1': `Allahu Akbar — The school’s initial progress came from an event that alarmed both teachers and students. Some teachers came worried to witness the power of God; the school had no savings to face future threats. Many thought the school had escaped danger, but God sometimes tests a person to show them things they did not consider a risk, then corrects their thinking.`,
+
+          'img2': 'First classroom',
+          'cap2': `What happened when the school collapsed? The teachers worked on despite the hardship. When the land was given for the school, there was a tree on the plot; the owner suggested taking the building foundation from behind the tree...`,
+
+          'img3': 'First classroom',
+          'cap3': `Work continued to recover the building foundations as shown in this photo; this all happened on the day of the collapse, yet classes were not suspended — teaching continued on another side.`,
+
+          'img4': 'First classroom',
+          'cap4': `Things then began to move forward — praise be to God. The new building started to shine and teachers’ hearts found peace despite the lack of funds, as the intention to continue was strong.`,
+
+          'img5': 'First classroom',
+          'cap5': `Alhamdulillah — The building took shape by the second day; you can see a teacher holding a mat ready for Dhuhr prayer before continuing work.`,
+
+          'img6': 'First classroom',
+          'cap6': `The building reached lintel level but there was not enough money to buy steel rods; however, determination prevailed and funds were gathered over months to purchase the rods.`,
+
+          'img7': 'First classroom',
+          'cap7': `And then!!!`
+        }
+      };
+
+      // List of elements to update by id
+      const keys = [
+        'brand','link-dashboard','link-profile','link-pay','link-idcard','link-history','link-logout',
+        'title','intro','progress','m1','m2','m3','m4','photos-heading',
+        'img1','cap1','img2','cap2','img3','cap3','img4','cap4','img5','cap5','img6','cap6','img7','cap7'
+      ];
+
+      const toggleBtn = document.getElementById('lang-toggle');
+      const langIndicator = document.getElementById('lang-indicator');
+      const mainContent = document.getElementById('main-content');
+
+      // Apply current translations
+      function applyLang(lang) {
+        // animation
+        mainContent.classList.remove('fade-slide');
+        void mainContent.offsetWidth; // reflow to restart animation
+        mainContent.classList.add('fade-slide');
+
+        // Set document language and direction
+        document.documentElement.lang = (lang === 'ar') ? 'ar' : (lang === 'en' ? 'en' : 'ha');
+        document.body.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+        // Update text content
+        keys.forEach(id => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const text = translations[lang][id];
+          if (text === undefined) return;
+          // For image alt attributes
+          if (id.startsWith('img')) {
+            el.alt = text;
+            return;
+          }
+          // Insert HTML for captions (they may contain line breaks)
+          if (id.startsWith('cap')) {
+            // preserve simple line breaks -> convert to <br> for HTML
+            el.innerHTML = text.replace(/\n/g, '<br>');
+            return;
+          }
+          // For other elements
+          el.textContent = text;
+        });
+
+        // Update toggle text and indicator
+        const label = (lang === 'ha') ? 'HA' : (lang === 'ar') ? 'AR' : 'EN';
+        toggleBtn.textContent = label;
+        langIndicator.textContent = label;
+      }
+
+      // Cycle to next language
+      function nextLang() {
+        currentIndex = (currentIndex + 1) % LANGS.length;
+        const lang = LANGS[currentIndex];
+        applyLang(lang);
+      }
+
+      // Initialize default (Hausa)
+      applyLang('ha');
+
+      // Click handler
+      toggleBtn.addEventListener('click', function() {
+        nextLang();
+      });
+
+      // Accessibility: allow Enter/Space on langIndicator to toggle too
+      langIndicator.tabIndex = 0;
+      langIndicator.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          nextLang();
+        }
+      });
+      langIndicator.addEventListener('click', nextLang);
+
+      // Optionally: remember user preference (uncomment to enable)
+      // if (localStorage.getItem('siteLang')) {
+      //   const saved = localStorage.getItem('siteLang');
+      //   currentIndex = LANGS.indexOf(saved) >= 0 ? LANGS.indexOf(saved) : 0;
+      //   applyLang(LANGS[currentIndex]);
+      // }
+      // toggleBtn.addEventListener('click', () => localStorage.setItem('siteLang', LANGS[currentIndex]));
+    })();
+  </script>
+</body>
+</html>

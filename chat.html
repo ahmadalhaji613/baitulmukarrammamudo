@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>School Chat Demo</title>
+  <style>
+    body { font-family: Arial; max-width: 800px; margin: 20px auto; }
+    #chat { border:1px solid #ccc; height: 300px; overflow:auto; padding:10px; }
+    .msg { margin:6px 0; }
+    .meta { font-size:0.8em; color:#555; }
+    #inputRow { display:flex; gap:8px; margin-top:8px; }
+    input[type=text]{flex:1;padding:8px;}
+  </style>
+</head>
+<body>
+  <h1>School Chat (Demo)</h1>
+  <div>
+    <label>Sunanka: <input id="name" type="text" placeholder="Sunan ka" /></label>
+    <button id="setName">Set</button>
+  </div>
+
+  <h3>Room: General</h3>
+  <div id="chat"></div>
+
+  <div id="inputRow">
+    <input id="msg" type="text" placeholder="Rubuta sako..." />
+    <button id="send">Aika</button>
+  </div>
+
+  <script>
+    const chatEl = document.getElementById('chat');
+    const nameInput = document.getElementById('name');
+    const setNameBtn = document.getElementById('setName');
+    const msgInput = document.getElementById('msg');
+    const sendBtn = document.getElementById('send');
+
+    const STORAGE_KEY = 'school_chat_msgs_v1';
+    function loadMessages() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }
+    function saveMessages(msgs) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
+    }
+    function render() {
+      chatEl.innerHTML = '';
+      const msgs = loadMessages();
+      msgs.forEach(m=>{
+        const d = new Date(m.t);
+        const el = document.createElement('div');
+        el.className = 'msg';
+        el.innerHTML = `<div><strong>${escapeHtml(m.user)}</strong> <span class="meta">${d.toLocaleString()}</span></div>
+                        <div>${escapeHtml(m.text)}</div>`;
+        chatEl.appendChild(el);
+      });
+      chatEl.scrollTop = chatEl.scrollHeight;
+    }
+    function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+
+    setNameBtn.onclick = ()=> {
+      if(!nameInput.value.trim()) return alert('Saka suna please');
+      localStorage.setItem('school_chat_name', nameInput.value.trim());
+      alert('An ajiye sunan a browser (demo)');
+    };
+    sendBtn.onclick = ()=>{
+      const name = localStorage.getItem('school_chat_name') || 'Guest';
+      const text = msgInput.value.trim();
+      if(!text) return;
+      const msgs = loadMessages();
+      msgs.push({ user: name, text, t: Date.now() });
+      saveMessages(msgs);
+      msgInput.value = '';
+      render();
+    };
+
+    // initialize
+    render();
+  </script>
+</body>
+</html>
