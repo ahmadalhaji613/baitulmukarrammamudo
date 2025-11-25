@@ -1,42 +1,79 @@
-<marquee behavior="scroll" direction="left" style="background: #007b5e; color: white; padding: 10px; font-weight: bold;">
-  Barka da zuwa Baitul Mukarram - Allah ya ba da sa'a!
-</marquee>
-<h1 class="animated-heading">As musch as you do you get what you want</h1>
+﻿<h1 class="animated-heading">As musch as you do you get what you want</h1>
+
 <!DOCTYPE html>
 <html lang="ha">
 <head>
   <meta charset="UTF-8">
-  <title>Login - Baitul Mukarram</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Shiga - Baitul Mukarram Mamudo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc'); /* za ka iya sauya hoton */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      color: black;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007b5e;
+color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Shiga Tsarin Makaranta</h2>
-    <form onsubmit="return validateLogin()">
-      <label for="id">ID Number:</label><br>
-      <input type="text" id="id" name="id" required><br><br>
 
-      <label for="password">Password:</label><br>
-      <input type="password" id="password" name="password" required><br><br>
+  <div class="overlay">
+    <h1>Baitul Mukarram Mamudo</h1>
+    <h2>Student Login Portal</h2>
 
-      <input type="submit" value="Login">
-    </form>
+    <div class="login-box">
+      <input type="text" placeholder="Student's ID">
+      <input type="password" placeholder="Password">
+      <button>Enter</button>
+    </div>
   </div>
 
-  <script>
-    function validateLogin() {
-      var id = document.getElementById('id').value;
-      var password = document.getElementById('password').value;
-
-      // Idan ID da password sun dace, a tura zuwa dashboard
-      if (id === 'BMM2025-001' && password === '1234') {
-        window.location.href = 'dashboard.html';
-        return false;
-      } else {
-        alert('Incorrect.');
-        return false;
-      }
-    }
-  </script>
 </body>
 </html>
