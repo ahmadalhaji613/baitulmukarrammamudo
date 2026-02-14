@@ -1,116 +1,197 @@
-﻿<!DOCTYPE html>
-<html lang="ha">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Student Dashboard</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTM Unified Portal | Multi-Section Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root { --green: #004d00; --gold: #d4af37; --bg: #001a00; --paper: #fdfcf0; }
+        body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: var(--bg); color: #fff; min-height: 100vh; }
+        .dev-header { background: rgba(0,0,0,0.5); padding: 10px; border-bottom: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; gap: 15px; position: relative; z-index: 200; }
+        .dev-img { width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--gold); }
+        .container { max-width: 950px; margin: 30px auto; padding: 20px; text-align: center; position: relative; z-index: 200; }
+        .main-title { font-family: 'Cinzel'; color: var(--gold); font-size: 28px; margin-bottom: 25px; }
+        .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .card { background: rgba(255,255,255,0.1); border: 2px solid var(--gold); border-radius: 15px; padding: 25px; cursor: pointer; transition: 0.3s; backdrop-filter: blur(5px); }
+        .card:hover { transform: translateY(-5px); background: var(--gold); color: #000; }
+        .page-section { display: none; padding: 15px; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .form-container { background: white; color: #333; padding: 25px; border-radius: 20px; text-align: left; max-width: 500px; margin: auto; border-top: 8px solid var(--green); }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1.5px solid #ccc; border-radius: 8px; font-weight: bold; box-sizing: border-box; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid var(--gold); border-radius: 50%; width: 18px; height: 18px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .btn-action { width: 100%; padding: 15px; background: var(--green); color: var(--gold); border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; position: relative; z-index: 300; }
 
-    body {
-      background-color: #f4f4f4;
-      font-family: Arial, sans-serif;
-    }
-
-    .logo {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .logo img {
-      width: 150px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    marquee {
-      background: #007b5e;
-      color: white;
-      padding: 10px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .animated-heading {
-      text-align: center;
-      color: #007b5e;
-      margin: 20px 0;
-      font-size: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    .container {
-      max-width: 500px;
-      margin: 20px auto;
-      padding: 30px;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .container h2 {
-      margin-bottom: 30px;
-      color: #333;
-    }
-
-    .buttons a {
-      text-decoration: none;
-    }
-
-    .buttons button {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      background-color: #007b5e;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .buttons button:hover {
-      background-color: #005f46;
-    }
-  </style>
+        #masterSlip { display: none; background: var(--paper); color: #111; width: 210mm; height: 297mm; padding: 5mm; margin: auto; box-sizing: border-box; position: relative; overflow: hidden; flex-direction: column; }
+        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 95%; opacity: 0.22; pointer-events: none; z-index: 0; }
+        .border-main { border: 4px solid var(--green); padding: 3px; flex-grow: 1; display: flex; flex-direction: column; position: relative; z-index: 1; }
+        .border-inner { border: 10px double var(--green); padding: 12mm; flex-grow: 1; display: flex; flex-direction: column; box-sizing: border-box; }
+        #slipBody { flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; margin: 10px 0; }
+        .entry { border-bottom: 2px solid #333; margin-bottom: 5px; font-size: 17px; padding-bottom: 3px; font-weight: 700; text-transform: uppercase; }
+        .agreement-box { border: 2.5px solid var(--green); padding: 10px; background: rgba(255,255,255,0.7); border-radius: 10px; font-size: 13px; line-height: 1.4; font-weight: 600; text-align: justify; }
+        .note-box { border: 2px solid red; padding: 10px; font-size: 12.5px; background: #fffefe; color: #000; line-height: 1.4; text-align: justify; font-weight: 600; }
+        .res-table { width: 100%; border-collapse: collapse; }
+        .res-table th { background: var(--green); color: var(--gold); padding: 10px; font-size: 14px; }
+        .res-table td { border: 1.5px solid #333; padding: 8px; text-align: center; font-weight: 800; font-size: 15px; }
+        @media print { .no-print { display: none !important; } #masterSlip { margin: 0; width: 100%; height: 297mm; display: flex !important; } }
+    </style>
 </head>
 <body>
 
-  <!-- LOGO SECTION -->
-  <div class="logo">
-   <img src="btmtlogo.JPG" alt="Baitul Mukarram Logo">
+<div class="dev-header no-print">
+    <img src="https://i.postimg.cc/Hs1hQB5x/my-picture.png" class="dev-img">
+    <div><b>Engr. Ahmad Muhammad</b></div>
+</div>
 
-  </div>
-
-  <!-- SCROLLING TEXT -->
-  <marquee behavior="scroll" direction="left">
-    Barka da zuwa Baitul Mukarram - Allah ya ba da sa'a!
-  </marquee>
-
-  <h1 class="animated-heading">As much as you do, you get what you want</h1>
-
-  <!-- MAIN CONTAINER -->
-  <div class="container">
-    <h2>Student Dashboard</h2>
-    <div class="buttons">
-      <a href="view-info.html"><button>View Personal Info</button></a>
-      <a href="payment-status.html"><button>Payment Status</button></a>
-      <a href="pay-fee.html"><button>Pay Semester Fee</button></a>
-      <a href="logout.html"><button>Logout</button></a>
+<div class="container no-print">
+    <div id="home-page">
+        <img src="https://i.postimg.cc/jjQK3tMj/Logo1.png" width="140"> 
+        <h1 class="main-title">BAITUL MUKARRAM UNIFIED PORTAL</h1>
+        <div class="portal-grid">
+            <div class="card" onclick="showSection('admission-menu')"><h3>📝 ADMISSION</h3></div>
+            <div class="card" onclick="showSection('result-login')"><h3>📜 EXAM RESULT</h3></div>
+        </div>
     </div>
-  </div>
 
+    <div id="admission-menu" class="page-section">
+        <h2 class="main-title">SELECT SECTION</h2>
+        <div class="portal-grid">
+            <div class="card" onclick="openForm('NURSERY SECTION', 'NUR')"><h4>Nursery</h4></div>
+            <div class="card" onclick="openForm('TAHFEEZUL QURAN', 'TAH')"><h4>Tahfeez</h4></div>
+            <div class="card" onclick="openForm('NISA\'I CLASS', 'NIS')"><h4>Nisa'i</h4></div>
+            <div class="card" onclick="openForm('5-DAYS CLASS', 'FDC')"><h4>5-Days</h4></div>
+        </div>
+        <button class="btn-action" style="width:130px; background:#444;" onclick="showSection('home-page')">Back</button>
+    </div>
+
+    <div id="form-page" class="page-section">
+        <div class="form-container">
+            <h2 id="form-title" style="color:var(--green); text-align:center;"></h2>
+            <input type="text" id="inName" placeholder="STUDENT FULL NAME">
+            <select id="inGender">
+                <option value="">SELECT GENDER</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+            </select>
+            <input type="text" id="inGuardian" placeholder="PARENT / GUARDIAN NAME">
+            <input type="tel" id="inPhone" placeholder="PHONE NUMBER">
+            <input type="text" id="inAddress" placeholder="HOME ADDRESS">
+            <input type="date" id="inDate">
+            <button class="btn-action" onclick="generateAdmission()">GENERATE ADMISSION SLIP</button>
+        </div>
+    </div>
+
+    <div id="result-login" class="page-section">
+        <div class="form-container" style="text-align:center;">
+            <h2>RESULT CHECKER</h2>
+            <input id="stdID" type="text" placeholder="Enter Student ID" oninput="fetchStudentName()">
+            <input id="stdNameDisp" type="text" placeholder="Student Name" readonly style="background:#f4f4f4;">
+            <input id="stdPIN" type="password" placeholder="Enter PIN">
+            <button id="viewBtn" class="btn-action" onclick="openResult()">
+                <span id="loadAnim" style="display:none;"><div class="loader"></div> Searching...</span>
+                <span id="btnText">VIEW EXAM RESULT</span>
+            </button>
+            <button class="btn-action" style="background:#444;" onclick="showSection('home-page')">Back</button>
+        </div>
+    </div>
+</div>
+
+<div id="masterSlip">
+    <img src="https://i.postimg.cc/j5pgx5QZ/Capture.jpg" class="watermark">
+    <div class="border-main">
+        <div class="border-inner">
+            <div style="text-align:center;">
+                <div style="font-size: 40px; color: var(--green); font-weight: 900; font-family: 'Times New Roman';">مَدْرَسَةُ بَيْتُ الْمُكَرَّمْ</div>
+                <h2 id="slipHeader" style="color:var(--green); font-family:Cinzel; margin:2px 0; font-size: 20px; text-decoration: underline;"></h2>
+                <div style="color:red; font-weight:900; letter-spacing:4px; font-size:15px;">MAMUDO, YOBE STATE</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin: 15px 0;">
+                <div id="slipPhoto" style="width:110px; height:125px; border:3px solid var(--green); background:#fff; overflow:hidden;"></div>
+                <img src="https://i.postimg.cc/jjQK3tMj/Logo1.png" width="130"> 
+                <div style="text-align:right; font-weight:800; font-size:15px;">
+                    ID NO: <span id="outID" style="color:blue"></span><br>
+                    SESSION: 2025/2026<br>
+                    DATE: <span id="outDate"></span>
+                </div>
+            </div>
+            <div id="slipBody"></div>
+            <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:flex-end;">
+                <div style="font-weight: 800; color: var(--green); font-size:12px;">BTM Unified Digital Portal &copy; 2026</div>
+                <div style="background:#fff; padding:2px; border:2px solid #333;"><img id="qrImg" src="" width="90"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="no-print" id="printBtns" style="display:none; text-align:center; padding:20px;">
+    <button class="btn-action" style="width:200px;" onclick="window.print()">PRINT SLIP</button>
+    <button class="btn-action" style="width:200px; background:#444;" onclick="location.reload()">HOME</button>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzh2OO8ZmOXkRKLlT3BBdTQQ8LEp3UJhPHf0YSKzEwt8B9ag2OdU6SSz4tRHTR8IziEmg/exec";
+    let allStudents = [];
+    let curCat = ""; let curPref = "";
+
+    function showSection(id) { $('.page-section, #home-page').hide(); $('#' + id).fadeIn(); }
+    fetch(SCRIPT_URL + "?action=getStudents").then(r => r.json()).then(res => { if(res.status === "success") allStudents = res.students; });
+
+    function fetchStudentName() {
+        let id = $("#stdID").val().trim();
+        let found = allStudents.find(s => String(s.ID) === id);
+        $("#stdNameDisp").val(found ? found.NAME : "");
+    }
+
+    function openForm(cat, pref) { curCat = cat; curPref = pref; $('#form-title').text(cat); showSection('form-page'); }
+
+    function generateAdmission() {
+        const name = $('#inName').val(); const guar = $('#inGuardian').val();
+        const gen = $('#inGender').val(); const date = $('#inDate').val();
+        const phone = $('#inPhone').val(); const addr = $('#inAddress').val();
+        if(!name || !guar || !gen) return alert("Please fill all fields!");
+        const regNo = "BTM/" + curPref + "/2026/" + Math.floor(100 + Math.random() * 899);
+
+        fetch(`${SCRIPT_URL}?action=register&regId=${regNo}&name=${name}&gender=${gen}&guardian=${guar}&phone=${phone}&address=${addr}&date=${date}&section=${curCat}`);
+
+        $('#slipHeader').text("ADMISSION REGISTRATION SLIP"); $('#outID').text(regNo); $('#outDate').text(date);
+        $('#slipPhoto').html("<div style='padding-top:50px; text-align:center; font-weight:bold; font-size:12px;'>PASSPORT</div>");
+        let body = `<div style="border: 2px solid #000; padding: 5px; background: #eee; text-align:center; font-weight:900; font-size:18px;">OFFICIAL STUDENT DATA</div>
+            <div><div class="entry">Full Name: ${name}</div><div class="entry">Gender: ${gen}</div><div class="entry">Guardian Name: ${guar}</div><div class="entry">Contact Phone: ${phone}</div><div class="entry">Home Address: ${addr}</div></div>
+            <div class="agreement-box"><b>PARENTAL UNDERTAKING:</b> I, <b>${guar}</b>, solemnly pledge to abide by the rules of Baitul Mukarram.</div>
+            <div class="note-box"><b>IMPORTANT NOTE:</b> Uniform is mandatory. Contact 08057925354. Modest dressing is required. Phones are prohibited.</div>`;
+        $('#slipBody').html(body);
+        $('#qrImg').attr("src", "https://api.qrserver.com/v1/create-qr-code/?data=" + regNo);
+        $('.container').hide(); $('#masterSlip').css('display', 'flex'); $('#printBtns').show();
+    }
+
+    function openResult() {
+        let id = $("#stdID").val().trim(); let pin = $("#stdPIN").val().trim();
+        let student = allStudents.find(s => String(s.ID) === id && String(s.PIN) === pin);
+        if(!student) return alert("Incorrect ID or PIN!");
+        if(student.STATUS == 1) {
+            let pUrl = (student.PHOTO && student.PHOTO.startsWith("http")) ? student.PHOTO : "https://www.w3schools.com/howto/img_avatar.png";
+            let blockedHTML = `<div style="background: white; padding: 30px; border-radius: 20px; border: 10px solid red; text-align: center; max-width: 500px; margin: 40px auto; color: #333;"><h1 style="color: red; font-family: Cinzel;">ACCESS DENIED!</h1><img src="${pUrl}" style="width: 130px; border: 4px solid red; border-radius: 10px; margin: 15px 0;"><h2 style="text-transform:uppercase;">${student.NAME}</h2><p style="color: red; font-weight: 800; font-size: 18px;">The school has withheld your result. Please report to the administration.</p><button class="btn-action" style="background:#444; width:150px;" onclick="location.reload()">BACK</button></div>`;
+            $('.container').html(blockedHTML); return;
+        }
+        $('#btnText').hide(); $('#loadAnim').show();
+        fetch(`${SCRIPT_URL}?action=getResult&id=${id}`).then(r => r.json()).then(res => {
+            $('#loadAnim').hide(); $('#btnText').show();
+            if(res.status === "success") {
+                let r = res.data; $('#slipHeader').text("EXAMINATION PROGRESS REPORT"); $('#outID').text("BTM-" + id);
+                let pUrl = (student.PHOTO && student.PHOTO.startsWith("http")) ? student.PHOTO : "https://www.w3schools.com/howto/img_avatar.png";
+                $('#slipPhoto').html(`<img src="${pUrl}" width="100%">`);
+                let rows = ""; let calcTotal = 0; let count = 0;
+                const subs = ["QURAN", "HURUF", "DURUSU", "TAUHEED", "TAJWEED", "SIIRA", "NAHWU", "ENGLISH", "MATH"];
+                subs.forEach(s => { if(r[s]) { let sc = parseFloat(r[s]); let gr = sc >= 70 ? "A" : sc >= 60 ? "B" : sc >= 50 ? "C" : "F"; rows += `<tr><td>${s}</td><td>${sc}</td><td>${gr}</td></tr>`; calcTotal += sc; count++; }});
+                let avg = (calcTotal/count).toFixed(1);
+                let body = `<div style="font-weight:900; font-size:18px;">STUDENT: ${student.NAME} | CLASS: ${student.CLASS}</div><table class="res-table"><thead><tr><th>SUBJECT</th><th>SCORE</th><th>GRADE</th></tr></thead><tbody>${rows}</tbody></table><div style="background:var(--green); color:var(--gold); padding:10px; text-align:center; font-weight:900; font-size:18px;">TOTAL: ${calcTotal} &nbsp;|&nbsp; AVG: ${avg}% &nbsp;|&nbsp; POS: ${r.POS || 'N/A'}</div>`;
+                $('#slipBody').html(body); $('#qrImg').attr("src", "https://api.qrserver.com/v1/create-qr-code/?data=BTM-RES-"+id);
+                $('.container').hide(); $('#masterSlip').css('display', 'flex'); $('#printBtns').show();
+            }
+        });
+    }
+</script>
 </body>
 </html>
